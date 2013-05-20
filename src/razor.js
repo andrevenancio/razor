@@ -59,3 +59,31 @@ Razor.inherits = function(child, parent) {
   child.prototype = new tempParent();
   child.prototype.constructor = child;
 };
+
+/**
+ * Returns global bounding box with x, y, width, height coordinates.
+ * @param  {dom} element Any dom element.
+ * @return {Object}         Bounding Box coordinates.
+ */
+Razor.getBoundingBox = function(element) {
+  var elem = element;
+  var tagname = '';
+  var x = 0;
+  var y = 0;
+
+  while ((typeof(elem) == 'object') && (typeof(elem.tagName) != 'undefined')) {
+    y += elem.offsetTop;
+    x += elem.offsetLeft;
+    tagname = elem.tagName.toUpperCase();
+
+    if (tagname == 'BODY') {
+      elem = 0;
+    }
+    if (typeof(elem) == 'object') {
+      if (typeof(elem.offsetParent) == 'object') {
+        elem = elem.offsetParent;
+      }
+    }
+  }
+  return {x: x, y: y};
+};
