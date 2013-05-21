@@ -5,24 +5,22 @@
 
 /**
  * Simple implementation of noise.
- * @param  {Number} w Width.
- * @param  {Number} h Height.
  * @return {imageData}   Manipulated image data.
  */
-Razor.SimpleNoise = function(w, h) {
-  this.width = w || 50;
-  this.height = h || 50;
+Razor.SimpleNoise = function() {
+  this.width = 50;
+  this.height = 50;
 
   this.whiteNoiseCanvas = document.createElement('canvas');
   this.simpleNoiseCanvas = document.createElement('canvas');
 
-  this.whiteNoiseCanvas.width = this.simpleNoiseCanvas.width = this.width;
-  this.whiteNoiseCanvas.height = this.simpleNoiseCanvas.height = this.height;
-
   this.contextNoise = this.whiteNoiseCanvas.getContext('2d');
   this.contextSimple = this.simpleNoiseCanvas.getContext('2d');
 
-  this.saved_alpha = this.contextSimple.globalAlpha;
+  this.R = 0;
+  this.G = 0;
+  this.B = 0;
+  this.A = 1;
 
   this.init();
 };
@@ -31,6 +29,39 @@ Razor.SimpleNoise = function(w, h) {
  * initializes Simple Noise
  */
 Razor.SimpleNoise.prototype.init = function() {
+  this.setDetail(this.width, this.height);
+  this.generate();
+};
+
+/**
+ * Sets detail level, the smaller the faster to compute.
+ * @param  {Number} detailW Detail in pixels.
+ * @param  {Number} detailH Hetail in pixels.
+ */
+Razor.SimpleNoise.prototype.setDetail = function(detailW, detailH) {
+  this.width = detailW;
+  this.height = detailH;
+
+  this.whiteNoiseCanvas.width = this.simpleNoiseCanvas.width = this.width;
+  this.whiteNoiseCanvas.height = this.simpleNoiseCanvas.height = this.height;
+};
+
+Razor.SimpleNoise.prototype.setRed = function(value) {
+  this.R = value || Math.floor(Math.random() * 256);
+};
+
+Razor.SimpleNoise.prototype.setGreen = function(value) {
+  this.G = value || Math.floor(Math.random() * 256);
+};
+
+Razor.SimpleNoise.prototype.setBlue = function(value) {
+  this.B = value || Math.floor(Math.random() * 256);
+};
+
+/**
+ * Rebuilds the experiment, everytime a parameter is changed
+ */
+Razor.SimpleNoise.prototype.generate = function() {
   this.buildWhiteNoise();
   this.buildSimpleNoise();
 };
@@ -44,9 +75,9 @@ Razor.SimpleNoise.prototype.buildWhiteNoise = function() {
   var pixels = noiseImageData.data;
 
   for (var i = 0; i < pixels.length; i += 4) {
-    pixels[i] = Math.floor(Math.random() * 256);
-    pixels[i + 1] = Math.floor(Math.random() * 256);
-    pixels[i + 2] = Math.floor(Math.random() * 256);
+    pixels[i] = this.R;
+    pixels[i + 1] = this.G;
+    pixels[i + 2] = this.B;
     pixels[i + 3] = 255;
   }
 
@@ -64,7 +95,7 @@ Razor.SimpleNoise.prototype.buildSimpleNoise = function() {
     this.contextSimple.globalAlpha = 4 / size;
     this.contextSimple.drawImage(this.whiteNoiseCanvas, x, y, size, size, 0, 0, this.width, this.height);
   }
-  this.contextSimple.globalAlpha = this.saved_alpha;
+  this.contextSimple.globalAlpha = this.A;
 };
 
 /**
