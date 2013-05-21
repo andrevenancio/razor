@@ -4,42 +4,48 @@
  */
 
 /**
- * Simple Noise
- * @constructor
+ * [ description]
+ * @param  {Number} w Width.
+ * @param  {Number} h Height.
+ * @return {imageData}   Manipulated image data.
  */
-Razor.SimpleNoise = function() {
-  this.canvas = document.createElement('canvas');
-  this.canvas_ctx = this.canvas.getContext('2d');
-  this.offscreen = document.createElement('canvas');
-  this.offscreen_ctx = this.offscreen.getContext('2d');
-  this.saved_alpha = this.canvas_ctx.globalAlpha;
+Razor.SimpleNoise = function(w, h) {
+  this.width = w || 50;
+  this.height = h || 50;
 
-  this.canvas.width = this.offscreen.width = 200;
-  this.canvas.height = this.offscreen.height = 200;
+  this.noise = document.createElement('canvas');
+  this.simple = document.createElement('canvas');
 
-  var offscreen_id = this.offscreen_ctx.getImageData(0, 0, this.offscreen.width, this.offscreen.height);
-  var offscreen_pixels = offscreen_id.data;
+  this.contextNoise = this.noise.getContext('2d');
+  this.contextSimple = this.simple.getContext('2d');
 
-  for (var i = 0; i < offscreen_pixels.length; i += 4) {
-    offscreen_pixels[i] = Math.floor(Math.random() * 256);
-    offscreen_pixels[i + 1] = Math.floor(Math.random() * 256);
-    offscreen_pixels[i + 2] = Math.floor(Math.random() * 256);
-    offscreen_pixels[i + 3] = 255;
+  this.saved_alpha = this.contextSimple.globalAlpha;
+  this.noise.width = this.width;
+  this.noise.height = this.height;
+
+  var noiseImageData = this.contextSimple.createImageData(this.width, this.height);
+  var pixels = noiseImageData.data;
+
+  for (var i = 0; i < pixels.length; i += 4) {
+    pixels[i] = Math.floor(Math.random() * 256);
+    pixels[i + 1] = Math.floor(Math.random() * 256);
+    pixels[i + 2] = Math.floor(Math.random() * 256);
+    pixels[i + 3] = 255;
   }
 
-  this.offscreen_ctx.putImageData(offscreen_id, 0, 0);
+  this.contextNoise.putImageData(noiseImageData, 0, 0);
 
-  /* Scale random iterations onto the canvas to generate Perlin noise. */
-  for (var size = 4; size <= this.offscreen.width; size *= 2) {
-    var x = Math.floor(Math.random() * (this.offscreen.width - size));
-    var y = Math.floor(Math.random() * (this.offscreen.height - size));
+  for (var size = 4; size <= this.width; size *= 2) {
+    var x = Math.floor(Math.random() * (this.width - size));
+    var y = Math.floor(Math.random() * (this.height - size));
 
-    this.canvas_ctx.globalAlpha = 4 / size;
-    this.canvas_ctx.drawImage(this.offscreen, x, y, size, size, 0, 0, this.canvas.width, this.canvas.height);
-    debugger;
+    this.contextSimple.globalAlpha = 4 / size;
+    this.contextSimple.drawImage(this.offscreen, x, y, size, size, 0, 0, this.width, this.height);
   }
-  this.canvas_ctx.globalAlpha = this.saved_alpha;
+  this.context.globalAlpha = this.saved_alpha;
 
   document.body.appendChild(this.canvas);
-  document.body.appendChild(this.offscreen);
+
+  this.data = context.getImageData(0, 0, this.width, this.height);
+  return this.data;
 };
