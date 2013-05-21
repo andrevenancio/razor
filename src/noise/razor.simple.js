@@ -22,6 +22,8 @@ Razor.SimpleNoise = function() {
   this.B = 0;
   this.A = 1;
 
+  this.isGrayscale = true;
+
   this.init();
 };
 
@@ -47,15 +49,15 @@ Razor.SimpleNoise.prototype.setDetail = function(detailW, detailH) {
 };
 
 Razor.SimpleNoise.prototype.setRed = function(value) {
-  this.R = Math.floor(Math.random() * (value + 1));
+  this.R = value;
 };
 
 Razor.SimpleNoise.prototype.setGreen = function(value) {
-  this.G = Math.floor(Math.random() * (value + 1));
+  this.G = value;
 };
 
 Razor.SimpleNoise.prototype.setBlue = function(value) {
-  this.B = Math.floor(Math.random() * (value + 1));
+  this.B = value;
 };
 
 /**
@@ -66,6 +68,14 @@ Razor.SimpleNoise.prototype.generate = function() {
   //this.buildSimpleNoise();
 };
 
+Razor.SimpleNoise.prototype.getRandom = function() {
+  var random = Math.random();
+  if (this.isGrayscale) {
+    random = 0;
+  }
+  return random;
+};
+
 /**
  * Builds white noise as a base for the simple noise.
  * TODO: try to build simple noise from a given image
@@ -74,11 +84,22 @@ Razor.SimpleNoise.prototype.buildWhiteNoise = function() {
   var noiseImageData = this.contextSimple.createImageData(this.width, this.height);
   var pixels = noiseImageData.data;
 
-  for (var i = 0; i < pixels.length; i += 4) {
-    pixels[i] = this.R;//this.R * (Math.floor(Math.random() * 256)) / this.R;
-    pixels[i + 1] = 255;//this.G * (Math.floor(Math.random() * 256)) / this.G;
-    pixels[i + 2] = 255;//this.B * (Math.floor(Math.random() * 256)) / this.B;
-    pixels[i + 3] = 255;
+  if (this.isGrayscale) {
+    for (var i = 0; i < pixels.length; i += 4) {
+      var random = Math.random();
+      pixels[i] = random * this.R;
+      pixels[i + 1] = random * this.G;
+      pixels[i + 2] = random * this.B;
+      pixels[i + 3] = 255;
+    }
+  } else {
+    for (var i = 0; i < pixels.length; i += 4) {
+      var random = Math.random();
+      pixels[i] = Math.random() * this.R;
+      pixels[i + 1] = Math.random() * this.G;
+      pixels[i + 2] = Math.random() * this.B;
+      pixels[i + 3] = 255;
+    }
   }
 
   this.contextNoise.putImageData(noiseImageData, 0, 0);
@@ -99,9 +120,17 @@ Razor.SimpleNoise.prototype.buildSimpleNoise = function() {
 };
 
 /**
- * Returns generated noise.
+ * Returns white noise.
  * @return {ImageData} Resulting ImageData Object.
  */
 Razor.SimpleNoise.prototype.getNoise = function() {
+  return this.contextNoise.getImageData(0, 0, this.width, this.height);
+};
+
+/**
+ * Returns generated noise.
+ * @return {ImageData} Resulting ImageData Object.
+ */
+Razor.SimpleNoise.prototype.getSimple = function() {
   return this.contextSimple.getImageData(0, 0, this.width, this.height);
 };
