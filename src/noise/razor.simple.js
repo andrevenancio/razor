@@ -14,8 +14,8 @@ Razor.SimpleNoise = function() {
   this.offscreen_ctx = this.offscreen.getContext('2d');
   this.saved_alpha = this.canvas_ctx.globalAlpha;
 
-  this.offscreen.width = 20;
-  this.offscreen.height = 20;
+  this.offscreen.width = 200;
+  this.offscreen.height = 200;
 
   var offscreen_id = this.offscreen_ctx.getImageData(0, 0, this.offscreen.width, this.offscreen.height);
   var offscreen_pixels = offscreen_id.data;
@@ -40,4 +40,5 @@ Razor.SimpleNoise = function() {
   this.canvas_ctx.globalAlpha = this.saved_alpha;
 
   document.body.appendChild(this.canvas);
+  document.body.appendChild(this.offscreen);
 };
