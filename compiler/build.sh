@@ -8,6 +8,8 @@ compile() {
 	--js=../src/razor.js \
   --js=../src/debugger/razor.debugger.js \
   --js=../src/debugger/razor.logger.js \
+  --js=../src/core/razor.vector2.js \
+  --js=../src/utils/razor.math.js \
 	--js_output_file ../build/razor.min.js 
 }
 
