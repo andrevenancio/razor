@@ -47,15 +47,15 @@ Razor.SimpleNoise.prototype.setDetail = function(detailW, detailH) {
 };
 
 Razor.SimpleNoise.prototype.setRed = function(value) {
-  this.R = value || Math.floor(Math.random() * 256);
+  this.R = Math.floor(Math.random() * (value + 1));
 };
 
 Razor.SimpleNoise.prototype.setGreen = function(value) {
-  this.G = value || Math.floor(Math.random() * 256);
+  this.G = Math.floor(Math.random() * (value + 1));
 };
 
 Razor.SimpleNoise.prototype.setBlue = function(value) {
-  this.B = value || Math.floor(Math.random() * 256);
+  this.B = Math.floor(Math.random() * (value + 1));
 };
 
 /**
