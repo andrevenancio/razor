@@ -9,7 +9,7 @@
 Razor.Debugger = function(useFPS, useLogging) {
   Razor.FPS = useFPS || Razor.FPS;
   Razor.logging = useLogging || Razor.logging;
-  
+
   this.gui = new dat.GUI({
     autoPlace: false
   });
@@ -40,12 +40,12 @@ Razor.Debugger.prototype.init = function() {
   this.gui.domElement.style.position = 'absolute';
   this.gui.domElement.style.right = '0px';
   this.gui.domElement.style.top = '40px';
-  document.body.appendChild(this.gui.domElement);
+  if (Razor.FPS)document.body.appendChild(this.gui.domElement);
 
   this.stats.domElement.style.position = 'absolute';
   this.stats.domElement.style.left = '0px';
   this.stats.domElement.style.top = '40px';
-  document.body.appendChild(this.stats.domElement);
+  if (Razor.FPS)document.body.appendChild(this.stats.domElement);
 };
 
 /**
