@@ -37,7 +37,7 @@ Razor.SimpleNoise = function() {
     this.canvas_ctx.globalAlpha = 4 / size;
     this.canvas_ctx.drawImage(this.offscreen, x, y, size, size, 0, 0, this.canvas.width, this.canvas.height);
   }
-  canvas_ctx.globalAlpha = saved_alpha;
+  this.canvas_ctx.globalAlpha = saved_alpha;
 
   document.body.appendChild(this.canvas);
 };
