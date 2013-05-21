@@ -21,8 +21,8 @@ Razor.SimpleNoise = function() {
   var offscreen_pixels = offscreen_id.data;
 
   for (var i = 0; i < offscreen_pixels.length; i += 4) {
-    offscreen_pixels[i] =
-    offscreen_pixels[i + 1] =
+    offscreen_pixels[i] = Math.floor(Math.random() * 256);
+    offscreen_pixels[i + 1] = Math.floor(Math.random() * 256);
     offscreen_pixels[i + 2] = Math.floor(Math.random() * 256);
     offscreen_pixels[i + 3] = 255;
   }
@@ -36,6 +36,7 @@ Razor.SimpleNoise = function() {
 
     this.canvas_ctx.globalAlpha = 4 / size;
     this.canvas_ctx.drawImage(this.offscreen, x, y, size, size, 0, 0, this.canvas.width, this.canvas.height);
+    debugger;
   }
   this.canvas_ctx.globalAlpha = this.saved_alpha;
 
