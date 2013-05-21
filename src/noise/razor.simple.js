@@ -75,9 +75,9 @@ Razor.SimpleNoise.prototype.buildWhiteNoise = function() {
   var pixels = noiseImageData.data;
 
   for (var i = 0; i < pixels.length; i += 4) {
-    pixels[i] = this.R;
-    pixels[i + 1] = this.G;
-    pixels[i + 2] = this.B;
+    pixels[i] = this.R * (Math.floor(Math.random() * 256)) / this.R;
+    pixels[i + 1] = this.G * (Math.floor(Math.random() * 256)) / this.G;
+    pixels[i + 2] = this.B * (Math.floor(Math.random() * 256)) / this.B;
     pixels[i + 3] = 255;
   }
 
