@@ -7,8 +7,8 @@
  * Razor Debugger instantiates Stats.js and dat.gui.js.
  */
 Razor.Debugger = function(useFPS, useLogging) {
-  Razor.FPS = useFPS || Razor.FPS;
-  Razor.logging = useLogging || Razor.logging;
+  Razor.FPS = useFPS;
+  Razor.logging = useLogging;
 
   this.gui = new dat.GUI({
     autoPlace: false
