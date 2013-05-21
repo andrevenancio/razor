@@ -40,7 +40,7 @@ Razor.SimpleNoise = function(w, h) {
     var y = Math.floor(Math.random() * (this.height - size));
 
     this.contextSimple.globalAlpha = 4 / size;
-    this.contextSimple.drawImage(this.offscreen, x, y, size, size, 0, 0, this.width, this.height);
+    this.contextSimple.drawImage(this.noise, x, y, size, size, 0, 0, this.width, this.height);
   }
   this.context.globalAlpha = this.saved_alpha;
 
