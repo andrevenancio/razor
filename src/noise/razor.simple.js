@@ -22,7 +22,7 @@ Razor.SimpleNoise = function() {
   this.B = 0;
   this.A = 1;
 
-  this.isGrayscale = true;
+  this.isGrayscale = false;
 
   this.init();
 };
@@ -49,15 +49,23 @@ Razor.SimpleNoise.prototype.setDetail = function(detailW, detailH) {
 };
 
 Razor.SimpleNoise.prototype.setRed = function(value) {
+  this.isGrayscale = false;
   this.R = value;
 };
 
 Razor.SimpleNoise.prototype.setGreen = function(value) {
+  this.isGrayscale = false;
   this.G = value;
 };
 
 Razor.SimpleNoise.prototype.setBlue = function(value) {
+  this.isGrayscale = false;
   this.B = value;
+};
+
+Razor.SimpleNoise.prototype.setGrayscale = function(value) {
+  this.isGrayscale = true;
+  this.R = this.B = this.G = value;
 };
 
 /**
@@ -65,7 +73,7 @@ Razor.SimpleNoise.prototype.setBlue = function(value) {
  */
 Razor.SimpleNoise.prototype.generate = function() {
   this.buildWhiteNoise();
-  //this.buildSimpleNoise();
+  this.buildSimpleNoise();
 };
 
 Razor.SimpleNoise.prototype.getRandom = function() {
