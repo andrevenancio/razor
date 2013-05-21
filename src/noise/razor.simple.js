@@ -11,7 +11,7 @@ Razor.SimpleNoise = function() {
   this.canvas = document.createElement('canvas');
   this.canvas_ctx = this.canvas.getContext('2d');
   this.offscreen = document.createElement('canvas');
-  this.offscreen_ctx = offscreen.getContext('2d');
+  this.offscreen_ctx = this.offscreen.getContext('2d');
   this.saved_alpha = this.canvas_ctx.globalAlpha;
 
   this.offscreen.width = 20;
