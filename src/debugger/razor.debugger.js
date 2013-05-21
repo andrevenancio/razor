@@ -35,17 +35,20 @@ Razor.Debugger.prototype.init = function() {
     }
   });
   rf.add(Razor, 'logging');
-  rf.close();
+  rf.open();
 
   this.gui.domElement.style.position = 'absolute';
   this.gui.domElement.style.right = '0px';
   this.gui.domElement.style.top = '40px';
-  if (Razor.FPS)document.body.appendChild(this.gui.domElement);
+  document.body.appendChild(this.gui.domElement);
 
   this.stats.domElement.style.position = 'absolute';
   this.stats.domElement.style.left = '0px';
   this.stats.domElement.style.top = '40px';
-  if (Razor.FPS)document.body.appendChild(this.stats.domElement);
+  document.body.appendChild(this.stats.domElement);
+
+  this.stats.domElement.style.display = Razor.FPS == true ? 'block' : 'none';
+
 };
 
 /**
