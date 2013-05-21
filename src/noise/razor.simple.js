@@ -63,7 +63,7 @@ Razor.SimpleNoise.prototype.setBlue = function(value) {
  */
 Razor.SimpleNoise.prototype.generate = function() {
   this.buildWhiteNoise();
-  this.buildSimpleNoise();
+  //this.buildSimpleNoise();
 };
 
 /**
