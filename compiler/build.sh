@@ -20,9 +20,9 @@ txtcyn=$(tput setaf 6)
 
 read -p "${txtgrn}Compile Razor${txtgrn}. ${txtrst} Continue (y/n)?" CONT
 if [ "$CONT" == "y" ]; then
-	clear
+	#clear
 	echo "${txtgrn}compiling ${txtcyn}"
 	compile
-	clear
+	#clear
 	echo "${txtgrn}compiling successfull${txtrst}"
 fi
