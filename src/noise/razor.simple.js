@@ -42,10 +42,7 @@ Razor.SimpleNoise = function(w, h) {
     this.contextSimple.globalAlpha = 4 / size;
     this.contextSimple.drawImage(this.noise, x, y, size, size, 0, 0, this.width, this.height);
   }
-  this.context.globalAlpha = this.saved_alpha;
+  this.contextSimple.globalAlpha = this.saved_alpha;
 
-  document.body.appendChild(this.canvas);
-
-  this.data = context.getImageData(0, 0, this.width, this.height);
-  return this.data;
+  return this.contextSimple.getImageData(0, 0, this.width, this.height);
 };
