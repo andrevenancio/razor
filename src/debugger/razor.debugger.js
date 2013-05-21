@@ -5,6 +5,7 @@
 
 /**
  * Razor Debugger instantiates Stats.js and dat.gui.js.
+ * @constructor
  */
 Razor.Debugger = function(useFPS, useLogging) {
   Razor.FPS = useFPS;

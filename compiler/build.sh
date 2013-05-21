@@ -6,9 +6,10 @@ compile() {
 	java -jar compiler.jar --language_in=ECMASCRIPT5 \
 	--compilation_level=SIMPLE_OPTIMIZATIONS \
 	--js=../src/razor.js \
+  --js=../src/core/razor.vector2.js \
+  --js=../src/noise/razor.simple.js \
   --js=../src/debugger/razor.debugger.js \
   --js=../src/debugger/razor.logger.js \
-  --js=../src/core/razor.vector2.js \
   --js=../src/utils/razor.math.js \
 	--js_output_file ../build/razor.min.js 
 }

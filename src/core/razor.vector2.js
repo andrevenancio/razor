@@ -8,6 +8,7 @@
  * @param  {Number} x Position x.
  * @param  {Number} y Position y.
  * @return {Number}   [description].
+ * @constructor
  */
 Razor.Vector2 = function(x, y) {
   var vector = new Float32Array(2);
