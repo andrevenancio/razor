@@ -10,6 +10,7 @@
  */
 Razor.log = function(params) {
   if (this['logging']) {
+    //console.log("%cBlue!", "color: blue;");
     console.log(params);
   }
 };
